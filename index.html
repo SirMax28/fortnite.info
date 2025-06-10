@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Arte Fortnite</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fuente Omnes: se debe agregar vía @font-face en CSS -->
+</head>
+<body>
+    <!-- Barra superior de envíos gratis -->
+    <div class="envio-gratis-bar">
+        Envío gratis a España en todos los pedidos de más de 35€
+    </div>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <img src="assets/img/logo2.png" alt="Logo Kindrop" class="logo-header">
+            <form class="search-form">
+                <input type="text" placeholder="Búsqueda..." aria-label="Buscar">
+                <button type="submit">🔍</button>
+            </form>
+            <div class="header-icons">
+                <span class="icon-user" title="Usuario">👤</span>
+                <span class="icon-cart" title="Carrito">🛒</span>
+                <span class="icon-fav" title="Favoritos">❤</span>
+                <img src="assets/img/espana.png" alt="Bandera España" class="icon-lang-small" title="Idioma">
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="#">Nuevos Lanzamientos</a>
+            <a href="#">Producto Estrella</a>
+            <a href="#">Colecciones</a>
+            <a href="#">Lo más vendido</a>
+            <a href="#">Rebajas</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="parallax-container">
+            <div class="parallax-layer sky" data-speed="0.1"></div>
+            <div class="parallax-layer mountains-back" data-speed="0.2"></div>
+            <div class="parallax-layer mountains-mid" data-speed="0.3"></div>
+            <div class="parallax-layer trees-back" data-speed="0.4"></div>
+            <div class="parallax-layer trees-front" data-speed="0.5"></div>
+            <div class="parallax-layer ground" data-speed="0.6"></div>
+        </div>
+        <img src="assets/img/palito_de_pez.png" alt="Mascota Pez" class="hero-mascot-corrected">
+        <div class="hero-content">
+            <h1>¿A qué nos dedicamos?</h1>
+            <p>
+                Nos dedicamos a la producción y distribución de merchandising exclusivo de Fortnite, combinando diseño y calidad en cada producto. Nuestro objetivo es brindar a los jugadores la posibilidad de llevar su pasión por Fortnite más allá de la pantalla, a través de artículos coleccionables y funcionales que complementen su experiencia gamer y les permitan personalizar su entorno de juego de manera única.
+            </p>
+            <a href="#" class="btn-leer-mas">LEER MÁS...</a>
+        </div>
+    </section>
+
+    <!-- Menú de secciones -->
+    <nav class="section-menu">
+        <a href="#historia">Historia</a>
+        <a href="#setup">Setup</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#comprar">Comprar</a>
+    </nav>
+
+    <!-- Carrusel de figuras ilustradas -->
+    <section class="figuras-setup" id="setup">
+        <h2>Figuras Setup</h2>
+        <div class="carrusel-wrapper">
+            <button class="carrusel-arrow left" aria-label="Anterior">&#8592;</button>
+            <div class="figuras-carrusel infinite-carrusel">
+                <div class="figura-item" data-id="corona-victoria">
+                    <img src="assets/img/corona.png" alt="Corona Victoria">
+                    <span>Corona Victoria</span>
+                </div>
+                <div class="figura-item" data-id="espiritu-superman">
+                    <img src="assets/img/fortnite_item.png" alt="Espíritu Superman">
+                    <span>Espíritu Superman</span>
+                </div>
+                <div class="figura-item figura-destacada" data-id="fred-llama">
+                    <img src="assets/img/llama.png" alt="Fred Llama">
+                    <span>Fred Llama</span>
+                </div>
+                <div class="figura-item" data-id="medallon">
+                    <img src="assets/img/escudo.png" alt="Medallón">
+                    <span>Medallón</span>
+                </div>
+                <div class="figura-item" data-id="granada-choque">
+                    <img src="assets/img/impulse.png" alt="Granada de choque">
+                    <span>Granada de choque</span>
+                </div>
+            </div>
+            <button class="carrusel-arrow right" aria-label="Siguiente">&#8594;</button>
+        </div>
+    </section>
+
+    <!-- Detalle de objeto ilustrado -->
+    <section class="detalle-objeto">
+        <div class="detalle-info">
+            <h2>Fred Llama</h2>
+            <p>
+                Las llamas, también conocidas como Llama Piñatas, son las principales "cajas de botín" en Fortnite: Salvar el Mundo. También son la mascota principal de Fortnite. Estos están disponibles específicamente a través del juego PvE, sin embargo, están en Battle Royale en forma de Llama de suministros. En Salvar el Mundo, hay muchos tipos de llamas. Estos incluyen mini llamas, llamas mejoradas, llamas con personas, llamas con armas, llamas con armas a distancia, llamas para eventos de lanzamiento, llamas especiales diarias y más.
+            </p>
+        </div>
+        <div class="detalle-img-cuadro">
+            <img src="assets/img/llama.png" alt="Fred Llama Ilustración" class="llama-img-cuadro">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <img src="assets/img/logo2.png" alt="Logo Kindrop" class="logo-footer">
+            <form class="footer-search-form">
+                <input type="text" placeholder="Barra de búsqueda..." aria-label="Buscar en footer">
+            </form>
+            <div class="footer-social">
+                <a href="#" title="WhatsApp"><img src="assets/img/whatsapp.png" alt="WhatsApp"></a>
+                <a href="#" title="Facebook"><img src="assets/img/facebook.png" alt="Facebook"></a>
+                <a href="#" title="Instagram"><img src="assets/img/instagram.png" alt="Instagram"></a>
+                <a href="#" title="Twitter"><img src="assets/img/twitter.png" alt="Twitter"></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="#">Mi cuenta</a>
+            <a href="#">Contáctanos</a>
+            <a href="#">Sobre nosotros</a>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
