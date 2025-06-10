@@ -24,6 +24,9 @@ body {
     padding: 0;
     background: #f5f5f5;
     color: #2d1b3b;
+    overflow-x: hidden;
+    width: 100%;
+    min-width: 320px;
 }
 
 /* Header */
@@ -31,6 +34,8 @@ body {
     background: #d7a6e6;
     color: #fff;
     width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 .header-top {
     display: flex;
@@ -39,6 +44,8 @@ body {
     padding: 1rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 .logo-header {
     height: 64px;
@@ -52,6 +59,7 @@ body {
     padding: 5px 15px;
     border: 1px solid #a02c7e;
     min-width: 300px;
+    margin: 0 auto;
 }
 .search-form input {
     border: none;
@@ -109,7 +117,9 @@ body {
     width: 100%;
     min-height: 500px;
     overflow: hidden;
-    background: #b6e0f7;
+    background: #b6e0f7 url('assets/img/paisaje_fondo.png') no-repeat center bottom;
+    background-size: cover;
+    max-width: 100vw;
 }
 
 .parallax-container {
@@ -121,7 +131,8 @@ body {
     background-image: url('assets/img/paisaje_fondo.png');
     background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-size: cover;
+    max-width: 100vw;
 }
 
 .hero-content {
@@ -131,7 +142,7 @@ body {
     border-radius: 20px;
     padding: 2.5rem;
     max-width: 600px;
-    margin: 4rem auto 2rem 30vw;
+    margin: 4rem auto 2rem 5%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }
 
@@ -308,13 +319,16 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
     background: #a02c7e;
-    padding: 4rem 2rem;
-    transition: opacity 0.3s ease;
+    padding: 4rem 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 .detalle-info {
-    max-width: 550px;
+    max-width: 500px;
+    flex: 1;
+    padding: 0 2rem;
 }
 .detalle-info h2 {
     color: #fff;
@@ -322,7 +336,6 @@ body {
     font-weight: bold;
     margin-bottom: 1.5rem;
     opacity: 0;
-    transform: translateY(20px);
     animation: fadeInUp 0.5s forwards;
 }
 .detalle-info p {
@@ -330,21 +343,29 @@ body {
     font-size: 1.1rem;
     line-height: 1.6;
     opacity: 0;
-    transform: translateY(20px);
     animation: fadeInUp 0.5s 0.2s forwards;
 }
 .detalle-img-cuadro {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
+    margin: 0 2rem;
 }
 .llama-img-cuadro {
-    width: 250px;
+    width: auto;
     height: auto;
-    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.2));
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center center;
+    max-width: 75%;
+    max-height: 75%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    animation: llama-aparece 1.2s cubic-bezier(.68,-0.55,.27,1.55) forwards;
 }
 
 /* Footer */
@@ -439,7 +460,6 @@ body {
     }
     .logo-header, .logo-footer { height: 44px; max-width: 120px; }
     .hero-content { margin-left: 0; padding: 1.2rem 1rem; }
-    .hero-mascot-corrected { left: 2vw; top: 30px; width: 90px; }
     .carrusel-wrapper { max-width: 98vw; }
     .figura-item { min-width: 120px; max-width: 120px; }
     .oval-animado { width: 180px; height: 120px; }
@@ -456,6 +476,7 @@ body {
     padding: 4px 0;
     font-size: 0.9rem;
     width: 100%;
+    max-width: 100vw;
 }
 
 /********* Carrusel de figuras *********/
@@ -499,9 +520,18 @@ body {
     animation: llama-aparece 1.2s 0.3s cubic-bezier(.68,-0.55,.27,1.55) forwards;
 }
 @keyframes llama-aparece {
-    0% { opacity: 0; transform: scale(0.7) translateY(40px); }
-    80% { opacity: 1; transform: scale(1.08) translateY(-10px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); }
+    0% { 
+        opacity: 0; 
+        transform: scale(0.7) translateY(40px); 
+    }
+    80% { 
+        opacity: 1; 
+        transform: scale(1.08) translateY(-10px); 
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0); 
+    }
 }
 .estrellas {
     position: absolute;
@@ -628,14 +658,29 @@ body {
     min-height: 320px;
     max-width: 380px;
     max-height: 380px;
+    width: 100%;
+    aspect-ratio: 1;
 }
 .llama-img-cuadro {
-    width: 260px;
+    width: auto;
     height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
     display: block;
+    margin: auto;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
     to {
         opacity: 1;
         transform: translateY(0);
@@ -655,12 +700,6 @@ body {
         margin: 6rem 1rem 2rem 1rem;
         padding: 1.5rem;
     }
-
-    .hero-mascot-corrected {
-        width: 120px;
-        left: 5%;
-        top: 40px;
-    }
 }
 
 @media (min-width: 2000px) {
@@ -668,16 +707,8 @@ body {
         min-height: 600px;
     }
 
-    .parallax-container {
-        background-size: 100% auto;
-    }
-
     .hero-content {
-        margin: 4rem auto 2rem 35vw;
-    }
-
-    .hero-mascot-corrected {
-        left: 15vw;
+        margin-left: 10%;
     }
 }
 
@@ -689,155 +720,149 @@ body {
     -webkit-transform-style: preserve-3d;
 }
 
-.hero-mascot-corrected {
-    position: absolute;
-    left: 7vw;
-    top: 60px;
-    width: 160px;
-    max-width: 18vw;
-    z-index: 7;
+.hero-content::before {
+    content: '';
+    background: url('assets/img/palito_de_pez.png') no-repeat center/contain;
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 0 1.5rem 0;
     animation: float 3s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-/* Animaciones para las tarjetas de productos */
-.product-card {
-    transform-origin: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    cursor: pointer;
-}
-
-.product-card:hover {
-    transform: scale(1.05) rotate(2deg);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-/* Animación de entrada para detalles del producto */
-.product-details {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: slideUpFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-.product-details.active {
-    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-}
-
-.product-image {
-    opacity: 0;
-    transform: scale(0.8) rotate(-10deg);
-    animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s forwards;
-}
-
-/* Animaciones para el texto */
-.product-title {
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInRight 0.5s ease 0.3s forwards;
-}
-
-.product-description {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideUpFade 0.5s ease 0.4s forwards;
-}
-
-/* Efectos de partículas al hacer click */
-.sparkle {
-    position: absolute;
-    pointer-events: none;
-    animation: sparkleOut 0.8s ease-out forwards;
-}
-
-/* Animación para secciones al hacer scroll */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Keyframes para las animaciones */
-@keyframes slideUpFade {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+@media (max-width: 375px) {
+    body {
+        width: 100vw;
+        overflow-x: hidden;
+        position: relative;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
+    .main-header, 
+    .hero, 
+    .section-menu,
+    .figuras-setup,
+    .detalle-objeto,
+    .main-footer {
+        width: 100%;
+        max-width: 100vw;
+        margin: 0;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        box-sizing: border-box;
+        overflow-x: hidden;
     }
-    50% {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
-    70% {
-        opacity: 0.9;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
 
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8) rotate(-10deg);
+    .header-top {
+        padding: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        flex-wrap: wrap;
+        justify-content: center;
     }
-    to {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-    }
-}
 
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
+    .search-form {
+        width: 90%;
+        min-width: unset;
+        margin: 0.5rem auto;
     }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
 
-@keyframes sparkleOut {
-    0% {
-        opacity: 1;
-        transform: scale(0) rotate(0deg);
+    .header-icons {
+        width: 100%;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 0.5rem;
     }
-    50% {
-        opacity: 1;
+
+    .main-nav {
+        width: 100%;
+        padding: 0.5rem;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 0.9rem;
     }
-    100% {
-        opacity: 0;
-        transform: scale(1.2) rotate(45deg);
+
+    .hero-content {
+        margin: 1rem;
+        padding: 1.5rem;
+        position: relative;
+    }
+
+    .hero-content::before {
+        margin: 0 0 1.5rem 0;
+        width: 120px;
+        height: 120px;
+    }
+
+    .detalle-objeto {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 0;
+        gap: 1.5rem;
+    }
+
+    .detalle-info {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 1.5rem;
+    }
+
+    .detalle-img-cuadro {
+        width: 220px;
+        height: 220px;
+        margin: 0;
+        padding: 1rem;
+    }
+
+    .llama-img-cuadro {
+        max-width: 85%;
+        max-height: 85%;
+    }
+
+    .detalle-info h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .detalle-info p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+
+    .logo-header {
+        margin: 0 auto;
+    }
+
+    .detalle-info h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 0.5s forwards;
+    }
+
+    .detalle-info p {
+        font-size: 1rem;
+        line-height: 1.5;
+        animation: fadeInUp 0.5s 0.2s forwards;
+    }
+
+    .llama-img-cuadro {
+        animation: llama-aparece 1s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+    }
+
+    /* Optimización de rendimiento para animaciones en móviles */
+    * {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }
 
-/* Estilos para las partículas */
-.particle {
-    position: absolute;
-    pointer-events: none;
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    border-radius: 50%;
-    width: 10px;
-    height: 10px;
+/* Asegurarse de que las animaciones se ejecuten solo cuando sean visibles */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 } 

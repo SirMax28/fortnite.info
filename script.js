@@ -277,6 +277,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function autoScroll() {
+        autoScrollInterval = setInterval(() => {
+            scrollCarrusel(1);
+        }, 3000);
+    }
+
+    function resetAutoScroll() {
+        clearInterval(autoScrollInterval);
+        if (!isMouseOver) {
+            autoScroll();
+        }
+    }
+
+    // Variable para trackear si el mouse está sobre el carrusel
+    let isMouseOver = false;
+
     btnLeft.addEventListener('click', () => {
         scrollCarrusel(-1);
         resetAutoScroll();
@@ -287,150 +303,36 @@ document.addEventListener('DOMContentLoaded', function () {
         resetAutoScroll();
     });
 
-    function autoScroll() {
-        autoScrollInterval = setInterval(() => {
-            scrollCarrusel(1);
-        }, 5000);
-    }
-
-    function resetAutoScroll() {
+    // Eventos de mouse
+    carrusel.addEventListener('mouseenter', () => {
+        isMouseOver = true;
         clearInterval(autoScrollInterval);
+    });
+
+    carrusel.addEventListener('mouseleave', () => {
+        isMouseOver = false;
         autoScroll();
-    }
+    });
+
+    // Eventos táctiles para dispositivos móviles
+    carrusel.addEventListener('touchstart', () => {
+        isMouseOver = true;
+        clearInterval(autoScrollInterval);
+    });
+
+    carrusel.addEventListener('touchend', () => {
+        isMouseOver = false;
+        autoScroll();
+    });
 
     // Inicialización
     cloneItems();
     autoScroll();
     actualizarDetalle('fred-llama'); // Mostrar Fred Llama inicialmente
 
-    // Eventos de mouse
-    carrusel.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-    carrusel.addEventListener('mouseleave', resetAutoScroll);
-
     // Prevenir el comportamiento extraño durante el scroll
     carrusel.addEventListener('scroll', () => {
         clearTimeout(carrusel.scrollTimeout);
         carrusel.scrollTimeout = setTimeout(checkInfiniteScroll, 100);
-    });
-
-    // Función para crear partículas
-    function createParticles(x, y) {
-        const particleCount = 12;
-        const colors = ['#FFD700', '#FFA500', '#FF69B4', '#00FF00'];
-
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            document.body.appendChild(particle);
-
-            const angle = (i / particleCount) * 360;
-            const velocity = 2 + Math.random() * 2;
-            const size = 5 + Math.random() * 5;
-
-            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = x + 'px';
-            particle.style.top = y + 'px';
-
-            gsap.to(particle, {
-                x: Math.cos(angle * Math.PI / 180) * 100 * velocity,
-                y: Math.sin(angle * Math.PI / 180) * 100 * velocity,
-                opacity: 0,
-                duration: 1 + Math.random(),
-                ease: 'power2.out',
-                onComplete: () => particle.remove()
-            });
-        }
-    }
-
-    // Función para manejar el efecto de scroll
-    function handleScrollAnimations() {
-        const elements = document.querySelectorAll('.scroll-reveal');
-        const windowHeight = window.innerHeight;
-
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            if (elementTop < windowHeight * 0.8) {
-                element.classList.add('visible');
-            }
-        });
-    }
-
-    // Función para animar la transición entre productos
-    function animateProductTransition(productElement) {
-        // Resetear animaciones previas
-        productElement.style.animation = 'none';
-        productElement.offsetHeight; // Forzar reflow
-
-        // Añadir clase active para iniciar animación
-        productElement.classList.add('active');
-
-        // Crear efecto de partículas
-        const rect = productElement.getBoundingClientRect();
-        createParticles(rect.left + rect.width / 2, rect.top + rect.height / 2);
-
-        // Animar elementos internos
-        const title = productElement.querySelector('.product-title');
-        const description = productElement.querySelector('.product-description');
-        const image = productElement.querySelector('.product-image');
-
-        if (title) title.style.animation = 'none';
-        if (description) description.style.animation = 'none';
-        if (image) image.style.animation = 'none';
-
-        // Forzar reflow
-        void productElement.offsetHeight;
-
-        // Iniciar animaciones
-        if (title) title.style.animation = '';
-        if (description) description.style.animation = '';
-        if (image) image.style.animation = '';
-    }
-
-    // Event Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        // Inicializar animaciones de scroll
-        handleScrollAnimations();
-
-        // Añadir clase scroll-reveal a elementos que queremos animar
-        document.querySelectorAll('.product-details, .section-title, .hero-content').forEach(element => {
-            element.classList.add('scroll-reveal');
-        });
-
-        // Click en productos del carrusel
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                const productDetails = document.querySelector('.product-details');
-                if (productDetails) {
-                    animateProductTransition(productDetails);
-                }
-                createParticles(e.clientX, e.clientY);
-            });
-        });
-    });
-
-    // Event listener para scroll
-    window.addEventListener('scroll', handleScrollAnimations);
-
-    // Animación hover para productos
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            gsap.to(card, {
-                scale: 1.05,
-                rotation: 2,
-                duration: 0.3,
-                ease: 'back.out(1.7)'
-            });
-        });
-
-        card.addEventListener('mouseleave', () => {
-            gsap.to(card, {
-                scale: 1,
-                rotation: 0,
-                duration: 0.3,
-                ease: 'back.out(1.7)'
-            });
-        });
     });
 }); 
