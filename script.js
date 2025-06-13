@@ -4,27 +4,27 @@
 const figurasData = {
     'corona-victoria': {
         titulo: 'Corona Victoria',
-        imagen: 'assets/img/corona.png',
+        imagen: 'assets/img/corona_op.png',
         descripcion: 'La Corona de la Victoria es un objeto icónico que representa el triunfo supremo en Fortnite. Otorgada solo a los jugadores más hábiles que logran conseguir una Victoria Royale, esta corona dorada es un símbolo de excelencia y dominio en el campo de batalla.'
     },
     'espiritu-superman': {
         titulo: 'Espíritu Superman',
-        imagen: 'assets/img/fortnite_item.png',
+        imagen: 'assets/img/espiritu_agua_op.png',
         descripcion: 'El Espíritu de Superman es una manifestación única de uno de los superhéroes más emblemáticos en Fortnite. Este objeto especial captura la esencia del Hombre de Acero, combinando el poder y la esperanza que Superman representa en el universo de Fortnite.'
     },
     'fred-llama': {
         titulo: 'Fred Llama',
-        imagen: 'assets/img/llama.png',
+        imagen: 'assets/img/llama_op.png',
         descripcion: 'Fred la Llama es la mascota más querida de Fortnite. Estas coloridas llamas no solo son adorables, sino que también contienen valiosos recursos y botín. En el modo Battle Royale, encontrar una Llama de Suministros puede cambiar completamente el curso de una partida.'
     },
     'medallon': {
         titulo: 'Medallón',
-        imagen: 'assets/img/escudo.png',
+        imagen: 'assets/img/escudo_op.png',
         descripcion: 'El Medallón es un artefacto legendario que simboliza el honor y la valentía en el mundo de Fortnite. Este objeto ornamentado no solo es una pieza de colección codiciada, sino que también representa el legado de los guerreros más destacados del juego.'
     },
     'granada-choque': {
         titulo: 'Granada de Choque',
-        imagen: 'assets/img/impulse.png',
+        imagen: 'assets/img/impulse_op.png',
         descripcion: 'La Granada de Choque es una herramienta táctica esencial en Fortnite. Este dispositivo explosivo no causa daño directo, pero genera una poderosa onda de choque que puede impulsar a los jugadores por los aires, perfecta para escapar de situaciones peligrosas o alcanzar lugares elevados.'
     }
 };
@@ -335,4 +335,70 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(carrusel.scrollTimeout);
         carrusel.scrollTimeout = setTimeout(checkInfiniteScroll, 100);
     });
+
+    // Animación de números en estadísticas
+    const estadisticasSection = document.querySelector('.estadisticas');
+    let animacionIniciada = false;
+
+    function animarNumero(elemento, valor, onComplete) {
+        let actual = 0;
+        const duracion = 2000; // 2 segundos
+        const incremento = valor / (duracion / 16); // 60 FPS
+
+        function actualizar() {
+            if (actual < valor) {
+                actual = Math.min(actual + incremento, valor);
+                elemento.textContent = Math.floor(actual);
+                requestAnimationFrame(actualizar);
+            } else {
+                if (onComplete) onComplete();
+            }
+        }
+
+        actualizar();
+    }
+
+    function checkVisible(element) {
+        const rect = element.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top <= windowHeight * 0.75;
+    }
+
+    function animarTodosLosNumeros() {
+        const numeros = document.querySelectorAll('.numero');
+        let numerosCompletados = 0;
+
+        numeros.forEach(numero => {
+            const valor = parseInt(numero.getAttribute('data-valor'));
+            numero.style.transform = 'translateY(20px)';
+            numero.style.opacity = '0';
+
+            setTimeout(() => {
+                numero.style.transform = 'translateY(0)';
+                numero.style.opacity = '1';
+                animarNumero(numero, valor, () => {
+                    numerosCompletados++;
+                    if (numerosCompletados === numeros.length) {
+                        // Cuando todos los números terminan, programar la siguiente animación
+                        setTimeout(() => {
+                            numeros.forEach(n => {
+                                n.textContent = '0';
+                            });
+                            animarTodosLosNumeros();
+                        }, 5000); // Esperar 5 segundos antes de reiniciar
+                    }
+                });
+            }, 200);
+        });
+    }
+
+    function iniciarAnimacionEstadisticas() {
+        if (!animacionIniciada && checkVisible(estadisticasSection)) {
+            animacionIniciada = true;
+            animarTodosLosNumeros();
+        }
+    }
+
+    window.addEventListener('scroll', iniciarAnimacionEstadisticas);
+    iniciarAnimacionEstadisticas(); // Verificar al cargar la página
 }); 

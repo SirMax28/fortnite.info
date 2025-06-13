@@ -349,22 +349,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+    background: url('assets/img/fondo_seccion.png') no-repeat center;
+    background-size: 100% 100%;
     width: 320px;
     height: 320px;
     flex-shrink: 0;
-    margin: 0 2rem;
+    position: relative;
 }
 .llama-img-cuadro {
     width: auto;
     height: auto;
-    max-width: 75%;
-    max-height: 75%;
+    max-width: 65%;
+    max-height: 65%;
     object-fit: contain;
     display: block;
     margin: auto;
+    position: relative;
+    z-index: 2;
     animation: llama-aparece 1.2s cubic-bezier(.68,-0.55,.27,1.55) forwards;
 }
 
@@ -649,26 +650,24 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
-    border-radius: 24px;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.10);
-    padding: 2rem;
-    margin-left: 2rem;
-    min-width: 320px;
-    min-height: 320px;
-    max-width: 380px;
-    max-height: 380px;
-    width: 100%;
-    aspect-ratio: 1;
+    background: url('assets/img/fondo_seccion.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 320px;
+    height: 320px;
+    flex-shrink: 0;
+    position: relative;
 }
 .llama-img-cuadro {
     width: auto;
     height: auto;
-    max-width: 80%;
-    max-height: 80%;
+    max-width: 65%;
+    max-height: 65%;
     object-fit: contain;
     display: block;
     margin: auto;
+    position: relative;
+    z-index: 2;
+    animation: llama-aparece 1.2s cubic-bezier(.68,-0.55,.27,1.55) forwards;
 }
 
 @keyframes float {
@@ -722,7 +721,7 @@ body {
 
 .hero-content::before {
     content: '';
-    background: url('assets/img/palito_de_pez.png') no-repeat center/contain;
+    background: url('assets/img/palito_de_pez_op.png') no-repeat center/contain;
     width: 120px;
     height: 120px;
     display: block;
@@ -812,12 +811,12 @@ body {
         width: 220px;
         height: 220px;
         margin: 0;
-        padding: 1rem;
+        background-size: 100% 100%;
     }
 
     .llama-img-cuadro {
-        max-width: 85%;
-        max-height: 85%;
+        max-width: 60%;
+        max-height: 60%;
     }
 
     .detalle-info h2 {
@@ -864,5 +863,190 @@ body {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+}
+
+/* Sección de Estadísticas */
+.estadisticas {
+    background: linear-gradient(135deg, #d7a6e6 0%, #a02c7e 100%);
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.estadisticas::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #ffe14d, transparent);
+    animation: brilloLinea 2s infinite;
+}
+
+.estadisticas-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+.estadistica-item {
+    text-align: center;
+    position: relative;
+    padding: 2rem;
+    flex: 1;
+    min-width: 250px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: apareceEstadistica 0.6s forwards;
+}
+
+.estadistica-circulo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.estadistica-circulo::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ffe14d, #a02c7e);
+    z-index: -1;
+    opacity: 0.5;
+    animation: rotarBorde 4s linear infinite;
+    transition: all 0.5s ease;
+}
+
+.estadistica-circulo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #d7a6e6, #ffe14d);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.estadistica-item:nth-child(1) { animation-delay: 0.2s; }
+.estadistica-item:nth-child(2) { animation-delay: 0.4s; }
+.estadistica-item:nth-child(3) { animation-delay: 0.6s; }
+
+.estadistica-circulo:hover {
+    transform: scale(1.05);
+}
+
+.estadistica-circulo:hover::after {
+    opacity: 0.15;
+}
+
+.estadistica-circulo:hover::before {
+    background: linear-gradient(45deg, #d7a6e6, #ffe14d);
+    opacity: 0.7;
+}
+
+.numero-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+}
+
+.numero {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.plus {
+    font-size: 2rem;
+    color: #ffe14d;
+    margin-left: 5px;
+    margin-top: 8px;
+    display: inline-block;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.estadistica-circulo:hover .numero {
+    transform: scale(1.1);
+    color: #ffe14d;
+}
+
+.texto {
+    font-size: 1.2rem;
+    color: #fff;
+    display: block;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.estadistica-decoracion {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: url('assets/img/llama_op.png') no-repeat center/contain;
+    opacity: 0.2;
+    top: 10px;
+    right: 10px;
+    animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes apareceEstadistica {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotarBorde {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes brilloLinea {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes flotar {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+    .estadisticas-container {
+        flex-direction: column;
+        gap: 3rem;
+    }
+    
+    .estadistica-circulo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .numero {
+        font-size: 2.8rem;
     }
 } 
